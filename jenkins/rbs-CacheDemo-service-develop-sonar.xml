@@ -1,0 +1,98 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.nirima.jenkins.plugins.docker.DockerJobProperty plugin="docker-plugin@0.8">
+      <tagOnCompletion>false</tagOnCompletion>
+      <additionalTag></additionalTag>
+      <pushOnSuccess>false</pushOnSuccess>
+      <cleanImages>true</cleanImages>
+    </com.nirima.jenkins.plugins.docker.DockerJobProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.1.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://bitbucket.pearson.com/scm/rbs/CacheDemo-service.git</url>
+        <credentialsId>8de60b82-9aaf-4442-82e4-22a1e4988edd</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/develop</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(System)</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec></spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.gradle.Gradle plugin="gradle@1.24">
+      <description></description>
+      <switches></switches>
+      <tasks>clean test --refresh-dependencies</tasks>
+      <rootBuildScriptDir></rootBuildScriptDir>
+      <buildFile></buildFile>
+      <gradleName>Gradle 4.5</gradleName>
+      <useWrapper>false</useWrapper>
+      <makeExecutable>false</makeExecutable>
+      <fromRootBuildScriptDir>true</fromRootBuildScriptDir>
+      <useWorkspaceAsHome>false</useWorkspaceAsHome>
+    </hudson.plugins.gradle.Gradle>
+    <hudson.tasks.Shell>
+      <command>BRANCH_NAME=&quot;develop&quot;
+SANITIZED_NAME=$(echo $BRANCH_NAME | sed &quot;s/\///g&quot; | sed &quot;s/-//g&quot;)
+#aws s3 cp /var/lib/jenkins/jobs/rbs-CacheDemo-service-sonar/workspace/build/libs/CacheDemo-*.war s3://non-prod-docker-wars/CacheDemo-service/$SANITIZED_NAME/CacheDemo-service.war</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.sonar.SonarRunnerBuilder plugin="sonar@2.4.4">
+      <project>$WORKSPACE</project>
+      <properties># Required metadata 
+sonar.projectKey=CacheDemo-service-develop
+sonar.projectName=CacheDemo-service-develop 
+sonar.projectVersion=1.0 
+
+#Test folder path 
+sonar.tests=src/test
+
+# Comma-separated paths to directories with sources (required) 
+sonar.sources=src/main
+sonar.java.binaries=build/classes/java/main
+
+# Language 
+sonar.language=java 
+
+# Encoding of the source files 
+sonar.sourceEncoding=UTF-8 
+sonar.binaries=build/classes/main
+sonar.dynamicAnalysis=reuseReports 
+sonar.junit.reportsPath=build/test-results/test
+sonar.jacoco.reportPath=build/jacoco/test.exec</properties>
+      <javaOpts></javaOpts>
+      <additionalArguments></additionalArguments>
+      <jdk>(Inherit From Job)</jdk>
+      <task></task>
+    </hudson.plugins.sonar.SonarRunnerBuilder>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
+    

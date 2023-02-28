@@ -1,0 +1,7 @@
+---
+version: '3'
+services:
+  service:
+    image: CacheDemo-service
+    ports:
+      - '9010:9010'

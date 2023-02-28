@@ -1,0 +1,23 @@
+
+apply plugin: "com.github.spotbugs"
+
+spotbugs {
+    ignoreFailures = false    
+  reportsDir = file("$project.buildDir/reports/spotbugs")
+  effort = "max"
+  reportLevel = "high"
+}
+
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+spotbugsTest {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+   <suppress>
+      <notes><![CDATA[
+      See DependencyCheck's bug https://github.com/jeremylong/DependencyCheck/issues/1827
+      ]]></notes>
+      <packageUrl regex="true">^pkg:maven/org\.springframework\.security/spring\-security\-.*@5\.3\..*$</packageUrl>
+      <cve>CVE-2018-1258</cve>
+   </suppress>
+</suppressions>

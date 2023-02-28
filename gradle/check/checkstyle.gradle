@@ -1,0 +1,8 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    ignoreFailures = false
+    toolVersion = '6.0'
+    configFile = rootProject.file("$rootProject.projectDir/config/checkstyle/checkstyle.xml")
+}
+

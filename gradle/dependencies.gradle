@@ -1,0 +1,56 @@
+/*
+For adding dependency from local file system, rather than from repository, during development use below.
+compile files('<local git repos dir>/rbs/rbs-common-auth-client-java-webflux/build/libs/rbs-common-auth-client-webflux-1.1.0-SNAPSHOT.jar')
+*/
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-webflux')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-tomcat')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile "org.springframework.security:spring-security-oauth2-client"
+	/* Spring Security Dependencies for OAuth2 */
+    compile "org.springframework.security.oauth:spring-security-oauth2:2.5.0.RELEASE"
+    /* Internal common library dependencies */
+    compile "com.savvas.ltg.rbs:rbs-common-auth-client-webflux:3.4.3-SNAPSHOT"
+    compile "com.savvas.ltg.rbs:rbs-project-template:3.3.0-SNAPSHOT"
+    compile "org.apache.commons:commons-lang3:3.5"
+    compile "org.apache.httpcomponents:httpclient:4.5.3"
+    compile "org.apache.httpcomponents:httpcore:4.4.6"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation "redis.clients:jedis"
+    implementation('org.json:json:20080701') {
+        force = true
+    }
+
+    compile "io.github.resilience4j:resilience4j-circuitbreaker:0.13.2"
+    compile "io.github.resilience4j:resilience4j-reactor:0.13.2"
+    compile "io.github.resilience4j:resilience4j-spring-boot2:0.13.2"
+    compile "io.github.resilience4j:resilience4j-ratelimiter:0.13.2"
+
+    annotationProcessor "org.projectlombok:lombok:1.18.4"
+    compileOnly "org.projectlombok:lombok:1.18.4"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.mockito:mockito-core:2.27.0"
+    testCompile "org.mockito:mockito-all:1.10.19"
+    compile('com.pearson:log4j-sqs-appender:1.0.1-SNAPSHOT')
+	testCompile group: 'com.pearson', name: 'log4j-sqs-appender', version:'1.0.1-SNAPSHOT', classifier: 'tests'
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile 'org.powermock:powermock-api-mockito2:2.0.2'
+    testCompile 'org.powermock:powermock-core:2.0.2'
+    testCompile 'org.powermock:powermock-module-junit4:2.0.2'
+    testCompile('org.springframework.security:spring-security-test:5.1.5.RELEASE')
+    
+    /* Following dependencies are intended to update known vulnerable libraries
+       Once dependency pulls higher library automatically, specifying explicit dependency may be not required */
+    /* jackson-databind:2.9.9 (which has CRITICAL severity vulnerability) was pulled by org.springframework.boot:spring-boot-starter-json:2.1.7.RELEASE */
+    compile "com.fasterxml.jackson.core:jackson-databind:2.11.1"
+    /* commons-collections4-4.0 (which has HIGH severity vulnerability) was pulled by com.pearson:log4j-sqs-appender:1.0.1-SNAPSHOT */
+    compile "org.apache.commons:commons-collections4:4.1"
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '9.0.37'
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-websocket', version: '9.0.37'
+}
