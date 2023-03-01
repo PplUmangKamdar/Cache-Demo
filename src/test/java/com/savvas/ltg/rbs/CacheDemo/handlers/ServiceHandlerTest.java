@@ -5,12 +5,6 @@
  */
 package com.savvas.ltg.rbs.CacheDemo.handlers;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +13,10 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.server.ServerRequest;
-import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.reactive.function.server.support.ServerRequestWrapper;
 import com.savvas.ltg.rbs.template.exception.ErrorHandler;
-import com.pearson.logging.domain.LogMessage;
 import com.pearson.logging.test.util.LogbackTestAppender;
-import com.pearson.logging.test.util.LoggerConstants;
 import com.pearson.logging.test.util.LoggerUtil;
 import com.savvas.ltg.rbs.template.utilities.TemplateUtilities;
 import com.savvas.ltg.rbs.CacheDemo.services.CachedemoService;

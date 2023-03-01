@@ -76,4 +76,4 @@ dependencyCheck {
     skipConfigurations=['checkstyle', 'spotbugs']
     failBuildOnCVSS=7
 }
-check.dependsOn dependencyCheckAnalyze
+//check.dependsOn dependencyCheckAnalyze

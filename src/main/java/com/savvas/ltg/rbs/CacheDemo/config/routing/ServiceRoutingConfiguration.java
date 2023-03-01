@@ -26,7 +26,7 @@ public class ServiceRoutingConfiguration extends TemplateRoutingConfiguration{
 
     /*Your Service-Specific Routes Go Here. */
     @Bean
-     public RouterFunction<ServerResponse> CacheDemoRoutes() {
+     public RouterFunction<ServerResponse> cacheDemoRoutes() {
         return route (POST("/CacheDemo-service/v1/insert/{param}"), serviceHandler :: insertCache)
                 .andRoute(GET("/CacheDemo-service/v1/get/{param}"), serviceHandler :: getCache)
                 .andRoute(POST("/CacheDemo-service/v2/insert/{param}"), serviceHandler :: insertCacheForInMemoryRedis)

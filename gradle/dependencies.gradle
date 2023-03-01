@@ -21,9 +21,6 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-data-redis"
     implementation "redis.clients:jedis"
-    implementation('org.json:json:20080701') {
-        force = true
-    }
 
     compile "io.github.resilience4j:resilience4j-circuitbreaker:0.13.2"
     compile "io.github.resilience4j:resilience4j-reactor:0.13.2"

@@ -14,7 +14,7 @@ public class CachedemoServiceTest {
     CachedemoService templateService;
 
     Mono<String> response = Mono.just("sample response");
-    String CacheDemoId = "3X6CVYD5Z28";
+    String cacheDemoId = "3X6CVYD5Z28";
 
     @Before
     public void init() {
